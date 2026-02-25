@@ -1,0 +1,61 @@
+# ====================================
+# Mini Austin Web 配置文件
+# ====================================
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: mini-austin-web
+
+  # 数据源配置（使用时请修改为你的MySQL地址）
+  datasource:
+    url: jdbc:mysql://192.168.140.129:3306/mini_austin?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # JPA配置
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # Redis配置（用作MQ和去重）
+  redis:
+    host: 192.168.140.129
+    port: 6379
+    password:
+    database: 0
+    timeout: 3000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+
+  # RabbitMQ配置（用于MQ）
+  rabbitmq:
+    host: 192.168.140.129
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+# ====================================
+# Mini Austin 业务配置
+# ====================================
+mini-austin:
+  mq:
+    # RabbitMQ 配置
+    exchange: austin-exchange
+    queue: austin-send-queue
+    routing-key: austin.send
+
+logging:
+  level:
+    com.mini.austin: debug

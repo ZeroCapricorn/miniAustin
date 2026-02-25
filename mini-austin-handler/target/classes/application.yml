@@ -1,0 +1,94 @@
+# ====================================
+# Mini Austin Handler 配置文件
+# ====================================
+
+server:
+  port: 8081
+
+spring:
+  application:
+    name: mini-austin-handler
+
+  # Redis配置
+  redis:
+    host: 192.168.140.129
+    port: 6379
+    password:
+    database: 0
+    timeout: 3000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+
+  # RabbitMQ配置（用于MQ）
+  rabbitmq:
+    host: 192.168.140.129
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+  # 邮件发送配置（使用时请修改为你自己的邮箱）
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 3159201784@qq.com
+    password: sqwhgebirhprdehf
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+
+# ====================================
+# Mini Austin 业务配置
+# ====================================
+mini-austin:
+  # 邮件发送开关（true=模拟发送，false=真实发送）
+  mail:
+    mock: false
+  # RabbitMQ 配置
+  mq:
+    exchange: austin-exchange
+    queue: austin-send-queue
+    routing-key: austin.send
+
+  # 线程池配置
+  thread-pool:
+    core-size: 4
+    max-size: 8
+
+  # 去重配置
+  deduplication:
+    expire-seconds: 300
+    queue-capacity: 128
+    keep-alive: 60
+
+  # ====================================
+  # Phase 4 高级功能配置
+  # ====================================
+
+  # 夜间屏蔽配置（仅对营销类消息生效）
+  night-shield:
+    enabled: true
+    start-hour: 21 # 屏蔽开始时间（21:00）
+    end-hour: 8 # 屏蔽结束时间（08:00）
+
+  # 敏感词过滤配置
+  sensitive-words:
+    enabled: true
+    replacement: "*" # 敏感词替换字符
+
+  # 频率限制配置（防止对用户过度发送）
+  frequency-limit:
+    enabled: true
+    day-max: 5 # 每用户每天最多收到消息数
+    hour-max: 2 # 每用户每小时最多收到消息数
+
+logging:
+  level:
+    com.mini.austin: debug

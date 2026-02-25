@@ -1,0 +1,14 @@
+D:\project\austin\austin\miniAustin\mini-austin-common\src\main\java\com\mini\austin\common\enums\MessageType.java
+D:\project\austin\austin\miniAustin\mini-austin-common\src\main\java\com\mini\austin\common\domain\ContentModel.java
+D:\project\austin\austin\miniAustin\mini-austin-common\src\main\java\com\mini\austin\common\dto\MessageParam.java
+D:\project\austin\austin\miniAustin\mini-austin-common\src\main\java\com\mini\austin\common\pipeline\ProcessContext.java
+D:\project\austin\austin\miniAustin\mini-austin-common\src\main\java\com\mini\austin\common\pipeline\ProcessModel.java
+D:\project\austin\austin\miniAustin\mini-austin-common\src\main\java\com\mini\austin\common\pipeline\BusinessProcess.java
+D:\project\austin\austin\miniAustin\mini-austin-common\src\main\java\com\mini\austin\common\domain\TaskInfo.java
+D:\project\austin\austin\miniAustin\mini-austin-common\src\main\java\com\mini\austin\common\vo\BasicResultVO.java
+D:\project\austin\austin\miniAustin\mini-austin-common\src\main\java\com\mini\austin\common\pipeline\ProcessTemplate.java
+D:\project\austin\austin\miniAustin\mini-austin-common\src\main\java\com\mini\austin\common\enums\RespStatusEnum.java
+D:\project\austin\austin\miniAustin\mini-austin-common\src\main\java\com\mini\austin\common\dto\model\EmailContentModel.java
+D:\project\austin\austin\miniAustin\mini-austin-common\src\main\java\com\mini\austin\common\dto\model\SmsContentModel.java
+D:\project\austin\austin\miniAustin\mini-austin-common\src\main\java\com\mini\austin\common\pipeline\ProcessController.java
+D:\project\austin\austin\miniAustin\mini-austin-common\src\main\java\com\mini\austin\common\enums\ChannelType.java

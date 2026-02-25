@@ -1,0 +1,74 @@
+classDiagram
+    %% 核心控制器
+    class ProcessController {
+        -Map~String, ProcessTemplate~ templateConfig
+        +process(ProcessContext context) ProcessContext
+        -preCheck(ProcessContext context) boolean
+    }
+
+    %% 模板类
+    class ProcessTemplate {
+        -List~BusinessProcess~ processList
+        +getProcessList() List~BusinessProcess~
+        +setProcessList(List~BusinessProcess~ processList)
+    }
+
+    %% 业务处理接口
+    class BusinessProcess {
+        <<interface>>
+        +process(ProcessContext context) void
+    }
+
+    %% 上下文对象
+    class ProcessContext {
+        -String code
+        -ProcessModel processModel
+        -Boolean needBreak
+        -BasicResultVO response
+        +getCode() String
+        +getProcessModel() ProcessModel
+        +getNeedBreak() Boolean
+        +setNeedBreak(Boolean needBreak)
+    }
+
+    %% 具体业务Action实现 (示例)
+    class PreCheckAction {
+        +process(ProcessContext context) void
+    }
+    class AssembleAction {
+        +process(ProcessContext context) void
+    }
+    class AfterCheckAction {
+        +process(ProcessContext context) void
+    }
+    class SendMqAction {
+        +process(ProcessContext context) void
+    }
+    
+    class DeduplicationAction {
+        +process(ProcessContext context) void
+    }
+    class DiscardAction {
+        +process(ProcessContext context) void
+    }
+    class SendMessageAction {
+        +process(ProcessContext context) void
+    }
+
+    %% 关系描述
+    ProcessController --> ProcessTemplate : 1. 根据code获取
+    ProcessTemplate o-- BusinessProcess : 2. 包含有序列表
+    BusinessProcess ..> ProcessContext : 3. 操作上下文
+    
+    %% 实现关系
+    BusinessProcess <|.. PreCheckAction
+    BusinessProcess <|.. AssembleAction
+    BusinessProcess <|.. AfterCheckAction
+    BusinessProcess <|.. SendMqAction
+    BusinessProcess <|.. DeduplicationAction
+    BusinessProcess <|.. DiscardAction
+    BusinessProcess <|.. SendMessageAction
+
+    note for ProcessController "责任链的执行引擎\n遍历 processList 依次调用 process()"
+    note for ProcessTemplate "责任链的配置容器\n通过 List 维护节点顺序"
+    note for BusinessProcess "原子业务节点\n每个类只做一件事"
